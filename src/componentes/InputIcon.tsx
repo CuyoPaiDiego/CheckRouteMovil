@@ -12,12 +12,13 @@ interface Props {
     iconName: string;
     placeholder: string;
     onChangeText: (value:string)=> void;
-
+    tipo?:StyleProp<any>;
     security?: boolean;
     style?: StyleProp<ViewStyle>
+    value?:string;
 }
 
-export const InputIcon = ({ click, margenAbajo, onChangeText, placeholder, iconName, security = false, style }: Props) => {
+export const InputIcon = ({value, tipo, click, margenAbajo, onChangeText, placeholder, iconName, security = false, style }: Props) => {
     
     const [securityIcon, setSecurityIcon] = useState("eye");
     const [showSecurity, setShowSecurity] = useState(security);
@@ -31,12 +32,16 @@ export const InputIcon = ({ click, margenAbajo, onChangeText, placeholder, iconN
     return (
         <View style={[style, localStyles.container, {marginBottom: margenAbajo}]} >
             <Ionicons name={iconName} size={40} />
-            <TextInput 
+            <TextInput
+                value={value} 
                 placeholder={placeholder}
                 onChangeText={onChangeText}
                 secureTextEntry={showSecurity}
-                style={[localStyles.input]}
+                style={[localStyles.input, {fontSize:20, textAlign:"center"}]}
                 onFocus={click}
+                keyboardType="number-pad"
+                
+                
             />
             {
                 (security) ? (
@@ -64,7 +69,7 @@ const localStyles = StyleSheet.create({
     },
     input: {
         height: 50,
-        width: 220,
+        width: 200,
         paddingHorizontal: 6,
     }
 });

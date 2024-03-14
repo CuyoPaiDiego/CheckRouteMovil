@@ -11,148 +11,146 @@ import React from 'react';
 import { VentanaModal } from "../../componentes/Alerta";
 
 
-interface Props extends DrawerScreenProps<RootDrawerChecadorNav,any>{
-}
-
-interface Props {
-    botonInsertarMulta: () => void;
+interface Props extends DrawerScreenProps<RootDrawerChecadorNav, any> {
 }
 
 
 
 
 
-export const InsertarMulta = () =>{
+
+
+export const InsertarMulta = () => {
     const [numeroUnidadInsertarMulta, setNumeroUnidadInsertarMulta] = useState("");
     const [alertaYes, setAlertYes] = useState(false);
     const [alertaNo, setAlertNo] = useState(false);
     const [error, setError] = useState("")
 
-   //#######  BOTON  #########
+    //#######  BOTON  #########
 
-   const botonInsertarMulta = async()=> {
-    const {mensaje} = await newMulta(numeroUnidadInsertarMulta).then(mens =>{
-        return mens;
-    })
-    if (mensaje == "Multa insertada correctamente"){
-         
-         setAlertYes(true);
-        
-    }else{
-        const mensajeMostrado = "No se pudo ingresar la multa. "+mensaje;
-        setError(mensajeMostrado)
-        setAlertNo(true)
+    const botonInsertarMulta = async () => {
+        const { mensaje } = await newMulta(numeroUnidadInsertarMulta).then(mens => {
+            return mens;
+        })
+        setNumeroUnidadInsertarMulta("");
+        if (mensaje == "Multa insertada correctamente") {
 
-        
+            setAlertYes(true);
+
+        } else {
+            const mensajeMostrado = "No se pudo ingresar la multa. " + mensaje;
+            setError(mensajeMostrado)
+            setAlertNo(true)
+        }
     }
 
 
-}
 
-
-
-    return(
+    return (
         <View style={{ flex: 1 }} >
-            
-            <HeaderApp logo height={160} />
+
             <View style={globalStyles.container} >
                 <KeyboardAvoidingView>
                     <ScrollView showsHorizontalScrollIndicator={false} >
-                        
-                        
-                                <View style={{ marginTop: 10 , flexDirection: 'row', gap:50, justifyContent: "center"}} >
-                                    
-                                    <Text style={[styles.textStyleBienvenido, {fontSize: 40}]}>
-                                        ¡Registrar Multa!
-                                    </Text>
-                                </View>
+                        <HeaderApp logo height={160} />
+                        <View style={{ marginTop: 10, flexDirection: 'row', gap: 50, justifyContent: "center" }} >
 
-                                <View style={{ marginTop: 10 , flexDirection: 'row', justifyContent: "center"}} >
-                                    
-                                    <Text style={[styles.textStyle2]}>
-                                        "Por favor llene los campos solicitados para Registrar una multa"
-                                    </Text>
-                                </View>
+                            <Text style={[styles.textStyleBienvenido, { fontSize: 40 }]}>
+                                ¡Registrar Multa!
+                            </Text>
+                        </View>
 
-                                <View style={{ marginTop: 50 , flexDirection: 'column', justifyContent: "center"}}>
-                                    <Text style={[styles.textStyle]}>
-                                        Inserte el numero de la unidad:
-                                    </Text>
+                        <View style={{ marginTop: 10, flexDirection: 'row', justifyContent: "center" }} >
 
-                                    <InputIcon iconName="car-sharp"
-                                    style={{ alignSelf: "center", backgroundColor: 'white', marginTop: 20}}
-                                    onChangeText={value => setNumeroUnidadInsertarMulta(value)}
-                                    placeholder="Número de unidad"/>
+                            <Text style={[styles.textStyle2]}>
+                                "Por favor llene los campos solicitados para registrar una multa"
+                            </Text>
+                        </View>
 
-                                    <Button
-                                        style={{width: 140, alignSelf: "center", marginTop: 30}}
-                                        text="Registrar Multa"
-                                        colorBackground={colors.primary}
-                                        fontColor="white"
-                                        altura={60}
-                                        onPress={botonInsertarMulta}
+                        <View style={{ marginTop: 50, flexDirection: 'column', justifyContent: "center" }}>
+                            <Text style={[styles.textStyle]}>
+                                Inserte el número de la unidad:
+                            </Text>
 
-                                    />
-                                    
-                                             <VentanaModal
-                                                colorIcon={colors.primary}
-                                                colorBoton={colors.primary}
-                                                nameIcon="checkmark-circle"
-                                                visible={alertaYes}
-                                                setVisible={setAlertYes}
-                                                text="Multa insertada correctamente"
-                                            
-                                                />
-                                        
-                                            <VentanaModal
-                                                colorIcon="red"
-                                                colorBoton="red"
-                                                nameIcon="alert-circle"
-                                                visible={alertaNo}
-                                                setVisible={setAlertNo}
-                                                text={"Ocurrio un error: "+error}
+                            <InputIcon
+                                iconName="car-sharp"
+                                style={{ alignSelf: "center", backgroundColor: 'white', marginTop: 20 }}
+                                value={numeroUnidadInsertarMulta}
+                                onChangeText={setNumeroUnidadInsertarMulta}
+                                placeholder="Número de unidad"
 
-                                                />
-                                         
-                                        
-                                    
-                                </View>
-                                
+                            />
+
+
+                            <Button
+                                style={{ width: 140, alignSelf: "center", marginTop: 30 }}
+                                text="Registrar Multa"
+                                colorBackground={colors.primary}
+                                fontColor="white"
+                                altura={60}
+                                onPress={botonInsertarMulta}
+
+                            />
+
+                            <VentanaModal
+                                colorIcon={colors.primary}
+                                colorBoton={colors.primary}
+                                nameIcon="checkmark-circle"
+                                visible={alertaYes}
+                                setVisible={setAlertYes}
+                                text="Multa insertada correctamente"
+
+                            />
+
+                            <VentanaModal
+                                colorIcon="red"
+                                colorBoton="red"
+                                nameIcon="alert-circle"
+                                visible={alertaNo}
+                                setVisible={setAlertNo}
+                                text={"Ocurrio un error: " + error}
+
+                            />
+
+
+
+                        </View>
+
                     </ScrollView>
                 </KeyboardAvoidingView>
             </View>
         </View>
     )
 
-     //########  FUNCION  #######3
+    //########  FUNCION  #######3
 
 
-     async function newMulta(idMulta:string){
+    async function newMulta(idMulta: string) {
         const mensaje = await fetch("https://8681-159-54-132-73.ngrok-free.app/api/multas/insertarMulta", {
-            method : "POST",
+            method: "POST",
             headers: {
-                "Content-Type":"application/json", 
+                "Content-Type": "application/json",
             },
             body: JSON.stringify({
                 "unidad": idMulta
             })
-        }).then(res =>{
+        }).then(res => {
             console.log(res);
             return res.json();
-        }).then(resolve =>{
-            console.log("error de funcion: "+ resolve);
+        }).then(resolve => {
+            console.log("error de funcion: " + resolve);
             console.log(resolve);
-            
+
             return resolve;
-        }).catch(e =>{
-            console.log("Error del catch "+e);
-            
+        }).catch(e => {
+            console.log("Error del catch " + e);
+
         })
         return mensaje;
     }
 
-    
-    
+
+
 
 
 
@@ -221,7 +219,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         textAlign: 'center',
         fontSize: 20,
-        padding:10,
+        padding: 10,
         paddingLeft: 50,
         paddingRight: 50,
         fontStyle: "italic"
@@ -231,7 +229,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         textAlign: 'justify',
         fontSize: 20,
-        padding:10,
+        padding: 10,
         paddingLeft: 50,
         paddingRight: 50,
         fontStyle: "italic"

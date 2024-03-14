@@ -43,7 +43,7 @@ export const LoginScreen = ({ navigation }: Props) => {
         }
         if (moodChofer) {
             console.log("Es un chofer");
-
+            navigation.navigate('DrawerChofer',{usuario:user});
         }
         if (!moodChecador && !moodChofer) {
             setModal(true);

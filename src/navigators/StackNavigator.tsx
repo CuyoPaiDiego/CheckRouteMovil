@@ -1,11 +1,13 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import { LoginScreen } from "../screens/LoginScreen";
 import { DrawerChecador } from "./DrawerNavigator";
+import { HorariosCh } from "../screens/chofer/Horarios";
 
 
 export type RootLoginStackParams = {
     LoginScreen: undefined;
     DrawerCh: undefined;
+    DrawerChofer: {usuario:string};
 }
 
 const Stack = createStackNavigator<RootLoginStackParams>();
@@ -16,6 +18,7 @@ export const StackNavigator = () => {
         screenOptions={{headerShown: false}}>
             <Stack.Screen name="LoginScreen" component={LoginScreen} />
             <Stack.Screen name="DrawerCh" component={DrawerChecador}/>
+            <Stack.Screen name="DrawerChofer" component={HorariosCh}/>
         </Stack.Navigator>
     );
 }

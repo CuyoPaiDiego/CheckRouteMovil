@@ -8,53 +8,53 @@ import { Button } from "../../componentes/Button";
 import { InputIcon } from "../../componentes/InputIcon";
 
 
-interface Props extends DrawerScreenProps<RootDrawerChecadorNav,any>{
+interface Props extends DrawerScreenProps<RootDrawerChecadorNav, any> {
 }
 
-export const EliminarSalidas = () =>{
-    return(
+export const EliminarSalidas = () => {
+    return (
         <View style={{ flex: 1 }} >
-            
-            <HeaderApp logo height={160} />
             <View style={globalStyles.container} >
                 <KeyboardAvoidingView>
                     <ScrollView showsHorizontalScrollIndicator={false} >
-                        
-                        
-                                <View style={{ marginTop: 10 , flexDirection: 'row', gap:50, justifyContent: "center"}} >
-                                    
-                                    <Text style={[styles.textStyleBienvenido, {fontSize: 40}]}>
-                                        ¡Eliminar Salida!
-                                    </Text>
-                                </View>
+                        <HeaderApp logo height={160} />
 
-                                <View style={{ marginTop: 10 , flexDirection: 'row', justifyContent: "center"}} >
-                                    
-                                    <Text style={[styles.textStyle2]}>
-                                        "Por favor complete los campos para Eliminar una salida"
-                                    </Text>
-                                </View>
 
-                                <View style={{ marginTop: 50 , flexDirection: 'column', justifyContent: "center"}}>
-                                    <Text style={[styles.textStyle]}>
-                                        Inserta el numero de la unidad:
-                                    </Text>
 
-                                    <InputIcon iconName="car-sharp"
-                                    style={{ alignSelf: "center", backgroundColor: 'white', marginTop: 20}}
-                                    onChangeText={()=>{}}
-                                    placeholder="Número de unidad"/>
+                        <View style={{ marginTop: 10, flexDirection: 'row', gap: 50, justifyContent: "center" }} >
 
-                                    <Button
-                                        style={{width: 140, alignSelf: "center", marginTop: 30}}
-                                        text="Eliminar Salida"
-                                        colorBackground={colors.primary}
-                                        fontColor="white"
-                                        altura={60}
-                                        onPress={()=>{}}
-                                    />
-                                </View>
-                                
+                            <Text style={[styles.textStyleBienvenido, { fontSize: 40 }]}>
+                                ¡Eliminar Salida!
+                            </Text>
+                        </View>
+
+                        <View style={{ marginTop: 10, flexDirection: 'row', justifyContent: "center" }} >
+
+                            <Text style={[styles.textStyle2]}>
+                                "Por favor complete los campos para Eliminar una salida"
+                            </Text>
+                        </View>
+
+                        <View style={{ marginTop: 50, flexDirection: 'column', justifyContent: "center" }}>
+                            <Text style={[styles.textStyle]}>
+                                Inserta el numero de la unidad:
+                            </Text>
+
+                            <InputIcon iconName="car-sharp"
+                                style={{ alignSelf: "center", backgroundColor: 'white', marginTop: 20 }}
+                                onChangeText={() => { }}
+                                placeholder="Número de unidad" />
+
+                            <Button
+                                style={{ width: 140, alignSelf: "center", marginTop: 30 }}
+                                text="Eliminar Salida"
+                                colorBackground={colors.primary}
+                                fontColor="white"
+                                altura={60}
+                                onPress={() => { }}
+                            />
+                        </View>
+
                     </ScrollView>
                 </KeyboardAvoidingView>
             </View>
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         textAlign: 'center',
         fontSize: 20,
-        padding:10,
+        padding: 10,
         paddingLeft: 50,
         paddingRight: 50,
         fontStyle: "italic"
@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         textAlign: 'justify',
         fontSize: 20,
-        padding:10,
+        padding: 10,
         paddingLeft: 50,
         paddingRight: 50,
         fontStyle: "italic"
