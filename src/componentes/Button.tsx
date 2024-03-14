@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { StyleProp, ViewStyle, TouchableOpacity, Text, StyleSheet } from "react-native";
+import { StyleProp, ViewStyle, TouchableOpacity, Text, StyleSheet, TextStyle } from "react-native";
 
 import { colors } from "../theme/styles";
 
@@ -11,8 +11,9 @@ interface Props {
     colorBackground?: string;
     fontColor?: string;
     borde?: StyleProp<ViewStyle>
-    styleText?: StyleProp<ViewStyle>;
+    styleText?: StyleProp<TextStyle>;
     altura?: number;
+    
 }
 
 export const Button = ({altura, styleText, borde, text, onPress, style, colorBackground = colors.buttonPrimary, fontColor = "black" }: Props) => {

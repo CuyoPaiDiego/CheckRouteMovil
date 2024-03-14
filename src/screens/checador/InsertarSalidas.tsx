@@ -3,7 +3,7 @@ import { RootDrawerChecadorNav } from "../../navigators/DrawerNavigator";
 import { Image, KeyboardAvoidingView, StyleSheet, Text, View } from "react-native";
 import { HeaderApp } from "../../componentes/HeaderApp";
 import { ScrollView } from "react-native-gesture-handler";
-import { globalStyles } from "../../theme/styles";
+import { colors, globalStyles } from "../../theme/styles";
 import { Button } from "../../componentes/Button";
 import { InputIcon } from "../../componentes/InputIcon";
 
@@ -18,27 +18,45 @@ export const InsertarSalidas = () =>{
             <HeaderApp logo height={160} />
             <View style={globalStyles.container} >
                 <KeyboardAvoidingView>
-                    <ScrollView showsHorizontalScrollIndicator={false} >
+                    <ScrollView showsHorizontalScrollIndicator={false}>
                         
                         
-                                <View style={{ marginTop: 50 , flexDirection: 'row', gap:50, justifyContent: "center"}} >
+                                <View style={{ marginTop: 10 , flexDirection: 'row', gap:50, justifyContent: "center"}} >
                                     
                                     <Text style={[styles.textStyleBienvenido, {fontSize: 40}]}>
-                                        ¡Ingrese los datos!
+                                        ¡Registrar Salidas!
                                     </Text>
                                 </View>
 
-                                <View style={{ marginTop: 50 , flexDirection: 'row', justifyContent: "center"}} >
+                                <View style={{ marginTop: 10 , flexDirection: 'row', justifyContent: "center"}} >
+                                    
+                                    <Text style={[styles.textStyle2]}>
+                                        "Por favor complete los campos para Registrar una salida"
+                                    </Text>
+                                </View>
+
+                                <View style={{ marginTop: 50 , flexDirection: 'column', justifyContent: "center"}} >
                                     
                                     <Text style={[styles.textStyle]}>
-                                        "aaa"
+                                        Inserte el numero de la unidad:
                                     </Text>
-                                </View>
-                           
-                                    
 
-                                    
-                                
+                                    <InputIcon iconName="car-sharp"
+                                    style={{ alignSelf: "center", backgroundColor: 'white', marginTop: 20}}
+                                    onChangeText={()=>{}}
+                                    placeholder="Número de la unidad"/>
+
+                                    <Button
+                                        style={{width: 140, alignSelf: "center", marginTop: 30}}
+                                        text="Registrar Salida"
+                                        colorBackground={colors.primary}
+                                        fontColor="white"
+                                        altura={60}
+                                        onPress={()=>{}}
+                                    />
+  
+                                </View>
+                                                               
                     </ScrollView>
                 </KeyboardAvoidingView>
             </View>
@@ -106,6 +124,16 @@ const styles = StyleSheet.create({
         color: 'green',
         fontWeight: 'bold',
         textAlign: 'center',
+        fontSize: 20,
+        padding:10,
+        paddingLeft: 50,
+        paddingRight: 50,
+        fontStyle: "italic"
+    },
+    textStyle2: {
+        color: 'green',
+        fontWeight: 'bold',
+        textAlign: 'justify',
         fontSize: 20,
         padding:10,
         paddingLeft: 50,

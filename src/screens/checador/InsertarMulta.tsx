@@ -1,17 +1,56 @@
 import { DrawerScreenProps } from "@react-navigation/drawer";
 import { RootDrawerChecadorNav } from "../../navigators/DrawerNavigator";
-import { Image, KeyboardAvoidingView, StyleSheet, Text, View } from "react-native";
+import { Alert, Image, KeyboardAvoidingView, StyleSheet, Text, View } from "react-native";
 import { HeaderApp } from "../../componentes/HeaderApp";
 import { ScrollView } from "react-native-gesture-handler";
 import { colors, globalStyles } from "../../theme/styles";
 import { Button } from "../../componentes/Button";
 import { InputIcon } from "../../componentes/InputIcon";
+import { useState } from "react";
+import React from 'react';
+import { VentanaModal } from "../../componentes/Alerta";
 
 
 interface Props extends DrawerScreenProps<RootDrawerChecadorNav,any>{
 }
 
-export const EliminarSalidas = () =>{
+interface Props {
+    botonInsertarMulta: () => void;
+}
+
+
+
+
+
+export const InsertarMulta = () =>{
+    const [numeroUnidadInsertarMulta, setNumeroUnidadInsertarMulta] = useState("");
+    const [alertaYes, setAlertYes] = useState(false);
+    const [alertaNo, setAlertNo] = useState(false);
+    const [error, setError] = useState("")
+
+   //#######  BOTON  #########
+
+   const botonInsertarMulta = async()=> {
+    const {mensaje} = await newMulta(numeroUnidadInsertarMulta).then(mens =>{
+        return mens;
+    })
+    if (mensaje == "Multa insertada correctamente"){
+         
+         setAlertYes(true);
+        
+    }else{
+        const mensajeMostrado = "No se pudo ingresar la multa. "+mensaje;
+        setError(mensajeMostrado)
+        setAlertNo(true)
+
+        
+    }
+
+
+}
+
+
+
     return(
         <View style={{ flex: 1 }} >
             
@@ -24,35 +63,59 @@ export const EliminarSalidas = () =>{
                                 <View style={{ marginTop: 10 , flexDirection: 'row', gap:50, justifyContent: "center"}} >
                                     
                                     <Text style={[styles.textStyleBienvenido, {fontSize: 40}]}>
-                                        ¡Eliminar Salida!
+                                        ¡Registrar Multa!
                                     </Text>
                                 </View>
 
                                 <View style={{ marginTop: 10 , flexDirection: 'row', justifyContent: "center"}} >
                                     
                                     <Text style={[styles.textStyle2]}>
-                                        "Por favor complete los campos para Eliminar una salida"
+                                        "Por favor llene los campos solicitados para Registrar una multa"
                                     </Text>
                                 </View>
 
                                 <View style={{ marginTop: 50 , flexDirection: 'column', justifyContent: "center"}}>
                                     <Text style={[styles.textStyle]}>
-                                        Inserta el numero de la unidad:
+                                        Inserte el numero de la unidad:
                                     </Text>
 
                                     <InputIcon iconName="car-sharp"
                                     style={{ alignSelf: "center", backgroundColor: 'white', marginTop: 20}}
-                                    onChangeText={()=>{}}
+                                    onChangeText={value => setNumeroUnidadInsertarMulta(value)}
                                     placeholder="Número de unidad"/>
 
                                     <Button
                                         style={{width: 140, alignSelf: "center", marginTop: 30}}
-                                        text="Eliminar Salida"
+                                        text="Registrar Multa"
                                         colorBackground={colors.primary}
                                         fontColor="white"
                                         altura={60}
-                                        onPress={()=>{}}
+                                        onPress={botonInsertarMulta}
+
                                     />
+                                    
+                                             <VentanaModal
+                                                colorIcon={colors.primary}
+                                                colorBoton={colors.primary}
+                                                nameIcon="checkmark-circle"
+                                                visible={alertaYes}
+                                                setVisible={setAlertYes}
+                                                text="Multa insertada correctamente"
+                                            
+                                                />
+                                        
+                                            <VentanaModal
+                                                colorIcon="red"
+                                                colorBoton="red"
+                                                nameIcon="alert-circle"
+                                                visible={alertaNo}
+                                                setVisible={setAlertNo}
+                                                text={"Ocurrio un error: "+error}
+
+                                                />
+                                         
+                                        
+                                    
                                 </View>
                                 
                     </ScrollView>
@@ -60,7 +123,42 @@ export const EliminarSalidas = () =>{
             </View>
         </View>
     )
+
+     //########  FUNCION  #######3
+
+
+     async function newMulta(idMulta:string){
+        const mensaje = await fetch("https://8681-159-54-132-73.ngrok-free.app/api/multas/insertarMulta", {
+            method : "POST",
+            headers: {
+                "Content-Type":"application/json", 
+            },
+            body: JSON.stringify({
+                "unidad": idMulta
+            })
+        }).then(res =>{
+            console.log(res);
+            return res.json();
+        }).then(resolve =>{
+            console.log("error de funcion: "+ resolve);
+            console.log(resolve);
+            
+            return resolve;
+        }).catch(e =>{
+            console.log("Error del catch "+e);
+            
+        })
+        return mensaje;
+    }
+
+    
+    
+
+
+
 }
+
+
 
 const styles = StyleSheet.create({
     image: {

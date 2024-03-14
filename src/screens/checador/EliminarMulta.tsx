@@ -11,7 +11,7 @@ import { InputIcon } from "../../componentes/InputIcon";
 interface Props extends DrawerScreenProps<RootDrawerChecadorNav,any>{
 }
 
-export const EliminarSalidas = () =>{
+export const EliminarMulta = () =>{
     return(
         <View style={{ flex: 1 }} >
             
@@ -24,17 +24,17 @@ export const EliminarSalidas = () =>{
                                 <View style={{ marginTop: 10 , flexDirection: 'row', gap:50, justifyContent: "center"}} >
                                     
                                     <Text style={[styles.textStyleBienvenido, {fontSize: 40}]}>
-                                        ¡Eliminar Salida!
+                                        ¡Eliminar Multa!
                                     </Text>
                                 </View>
 
                                 <View style={{ marginTop: 10 , flexDirection: 'row', justifyContent: "center"}} >
                                     
                                     <Text style={[styles.textStyle2]}>
-                                        "Por favor complete los campos para Eliminar una salida"
+                                        "Por favor llene los campos solicitados para Eliminar una multa"
                                     </Text>
                                 </View>
-
+                                    
                                 <View style={{ marginTop: 50 , flexDirection: 'column', justifyContent: "center"}}>
                                     <Text style={[styles.textStyle]}>
                                         Inserta el numero de la unidad:
@@ -43,15 +43,15 @@ export const EliminarSalidas = () =>{
                                     <InputIcon iconName="car-sharp"
                                     style={{ alignSelf: "center", backgroundColor: 'white', marginTop: 20}}
                                     onChangeText={()=>{}}
-                                    placeholder="Número de unidad"/>
+                                    placeholder="Numero de unidad"/>
 
                                     <Button
                                         style={{width: 140, alignSelf: "center", marginTop: 30}}
-                                        text="Eliminar Salida"
+                                        text="Eliminar Multa"
                                         colorBackground={colors.primary}
                                         fontColor="white"
                                         altura={60}
-                                        onPress={()=>{}}
+                                        onPress={()=> {}}
                                     />
                                 </View>
                                 
