@@ -41,9 +41,6 @@ export const HorariosCh = ({ navigation, route }: Props) => {
             })
             setHorarios(matriz);
             console.log(matriz);
-            
-            
-
         } catch (error) {
             console.error("Error al obtener horarios:", error);
 
@@ -127,7 +124,7 @@ export const HorariosCh = ({ navigation, route }: Props) => {
 
 
     async function horario(user:string)  {
-        const mensaje = await fetch('https://8681-159-54-132-73.ngrok-free.app/api/horarios/consultar', {
+        const mensaje = await fetch('http://checkroute.ddns.net:12345/api/horarios/consultar', {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

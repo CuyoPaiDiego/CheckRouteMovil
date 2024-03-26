@@ -99,7 +99,6 @@ export const InsertarMulta = () => {
                                 visible={alertaYes}
                                 setVisible={setAlertYes}
                                 text="Multa insertada correctamente"
-
                             />
 
                             <VentanaModal
@@ -109,7 +108,6 @@ export const InsertarMulta = () => {
                                 visible={alertaNo}
                                 setVisible={setAlertNo}
                                 text={"Ocurrio un error: " + error}
-
                             />
 
 
@@ -126,7 +124,7 @@ export const InsertarMulta = () => {
 
 
     async function newMulta(idMulta: string) {
-        const mensaje = await fetch("https://8681-159-54-132-73.ngrok-free.app/api/multas/insertarMulta", {
+        const mensaje = await fetch("https://702b-159-54-132-73.ngrok-free.app/api/multas/insertarMulta", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

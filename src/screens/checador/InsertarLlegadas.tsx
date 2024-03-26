@@ -6,12 +6,63 @@ import { ScrollView } from "react-native-gesture-handler";
 import { colors, globalStyles } from "../../theme/styles";
 import { Button } from "../../componentes/Button";
 import { InputIcon } from "../../componentes/InputIcon";
+import { useState } from "react";
+import { VentanaModal } from "../../componentes/Alerta";
 
 
 interface Props extends DrawerScreenProps<RootDrawerChecadorNav, any> {
 }
 
 export const InsertarLlegadas = () => {
+    const [numeroInsertarLlegadaUnidad, setNumeroInsertarLlegadaUnidad] = useState("");
+    const [alertaYes, setAlertYes] = useState(false);
+    const [alertaNo, setAlertNo] = useState(false);
+    const [error, setError] = useState("")
+    const ruta = "https://8681-159-54-132-73.ngrok-free.app";
+
+    //#######  BOTON#########
+
+    const botonInsertarLlegadas = async () => {
+        const { mensaje } = await insertarSalida(numeroInsertarLlegadaUnidad).then(mens => {
+            console.log(mens);
+            return mens;
+        })
+        setNumeroInsertarLlegadaUnidad
+        if (mensaje == "Registro actualizado correctamente") {
+            setAlertYes(true);
+        } else {
+            const mensajeMostrado = "No se pudo ingresar la llegada de la unidad. " + mensaje;
+            setError(mensajeMostrado)
+            setAlertNo(true)
+        }
+        setNumeroInsertarLlegadaUnidad("");
+    }
+
+    //########  FUNCION  #######3
+
+    async function insertarSalida(idUnidad: string) {
+        const mensaje = await fetch("https://702b-159-54-132-73.ngrok-free.app/api/registros/actualizarRegistro", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                "idUnidad": idUnidad
+            })
+        }).then(res => {
+
+            return res.json();
+
+
+        }).then(resolve => {
+            console.log("error de funcion: " + resolve);
+            return resolve;
+        }).catch(e => {
+            console.log("error del catch " + e);
+
+        })
+        return mensaje;
+    }
     return (
         <View style={{ flex: 1 }} >
             <View style={globalStyles.container} >
@@ -31,19 +82,20 @@ export const InsertarLlegadas = () => {
                         <View style={{ marginTop: 10, flexDirection: 'row', justifyContent: "center" }} >
 
                             <Text style={[styles.textStyle2]}>
-                                "Por favor complete los campos para Registrar una salida"
+                                "Por favor complete los campos para registrar una salida"
                             </Text>
                         </View>
 
                         <View style={{ marginTop: 50, flexDirection: 'column', justifyContent: "center" }}>
                             <Text style={[styles.textStyle]}>
-                                Inserte el numero de la unidad:
+                                Inserte el número de la unidad para insertar su llegada:
                             </Text>
 
                             <InputIcon iconName="car-sharp"
                                 style={{ alignSelf: "center", backgroundColor: 'white', marginTop: 20 }}
-                                onChangeText={() => { }}
-                                placeholder="Numero de unidad" />
+                                value={numeroInsertarLlegadaUnidad}
+                                onChangeText={setNumeroInsertarLlegadaUnidad}
+                                placeholder="Número de unidad" />
 
                             <Button
                                 style={{ width: 140, alignSelf: "center", marginTop: 30 }}
@@ -51,7 +103,26 @@ export const InsertarLlegadas = () => {
                                 colorBackground={colors.primary}
                                 fontColor="white"
                                 altura={60}
-                                onPress={() => { }}
+                                onPress={botonInsertarLlegadas}
+                            />
+                            <VentanaModal
+                                colorIcon={colors.primary}
+                                colorBoton={colors.primary}
+                                nameIcon="checkmark-circle"
+                                visible={alertaYes}
+                                setVisible={setAlertYes}
+                                text="Llegada registrada correctamente"
+
+                            />
+
+                            <VentanaModal
+                                colorIcon="red"
+                                colorBoton="red"
+                                nameIcon="alert-circle"
+                                visible={alertaNo}
+                                setVisible={setAlertNo}
+                                text={"Ocurrio un error: " + error}
+
                             />
                         </View>
 

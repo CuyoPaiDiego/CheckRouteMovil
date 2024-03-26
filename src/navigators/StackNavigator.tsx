@@ -15,10 +15,11 @@ export const StackNavigator = () => {
 
     return (
         <Stack.Navigator
+        
         screenOptions={{headerShown: false}}>
-            <Stack.Screen name="LoginScreen" component={LoginScreen} />
-            <Stack.Screen name="DrawerCh" component={DrawerChecador}/>
-            <Stack.Screen name="DrawerChofer" component={HorariosCh}/>
+            <Stack.Screen options={{ gestureEnabled: false }} name="LoginScreen" component={LoginScreen} />
+            <Stack.Screen options={{ gestureEnabled: false }} name="DrawerCh" component={DrawerChecador}/>
+            <Stack.Screen options={{ gestureEnabled: false }} name="DrawerChofer" component={HorariosCh}/>
         </Stack.Navigator>
     );
 }

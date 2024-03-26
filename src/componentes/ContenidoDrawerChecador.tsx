@@ -26,7 +26,7 @@ export const ContenidoDrawer = ({ drawerProps }: Props) => {
                         styleText={styles.tamañoTextoBoton}
                         fontColor="green"
                         onPress={() => navigation.navigate("InsertarSalidas")}
-                        text="Insertar salida"
+                        text="Registrar salida"
                     />
                     <Button 
                         altura={45} 
@@ -59,7 +59,7 @@ export const ContenidoDrawer = ({ drawerProps }: Props) => {
                         styleText={styles.tamañoTextoBoton} 
                         fontColor="green" 
                         onPress={() => navigation.navigate("InsertarLlegadas")} 
-                        text="Insertar llegada" 
+                        text="Registrar llegada" 
                     />
                     {/* <Button 
                         altura={45} 
@@ -76,7 +76,7 @@ export const ContenidoDrawer = ({ drawerProps }: Props) => {
                         colorBackground="white" 
                         styleText={styles.tamañoTextoBoton} 
                         fontColor="green" 
-                        onPress={() => navigation.navigate("VerLlegadasSalidas")} 
+                        onPress={() => navigation.navigate("VerLlegadasSalidas",{numero:1})} 
                         text="Ver salidas/llegadas" 
                     />
 

@@ -22,7 +22,7 @@ export type RootDrawerChecadorNav = {
     ActualizarSalidas: undefined;
     EliminarSalidas: undefined;
     InsertarLlegadas: undefined;
-    VerLlegadasSalidas: undefined;
+    VerLlegadasSalidas: {numero:number};
     InsertarMulta:undefined;
     ActualizarMulta: undefined;
     EliminarMulta: undefined;
@@ -35,7 +35,7 @@ const Drawer = createDrawerNavigator();
 export function DrawerChecador() {
     return (
         <Drawer.Navigator
-            backBehavior='order'
+            backBehavior='initialRoute'
             drawerContent={(props) => <ContenidoDrawer drawerProps={props} />}
             screenOptions={{
                 title: '',
@@ -48,11 +48,11 @@ export function DrawerChecador() {
             <Drawer.Screen options={{drawerActiveBackgroundColor:"white"}} name='InsertarSalidas' component={InsertarSalidas} />
             <Drawer.Screen options={{drawerActiveBackgroundColor:"white"}} name='ActualizarSalidas' component={ActualizarSalidas} />
             <Drawer.Screen options={{drawerActiveBackgroundColor:"white"}} name='EliminarSalidas' component={EliminarSalidas} />
-            <Drawer.Screen options={{drawerActiveBackgroundColor:"white"}} name='InsertarLlegada' component={InsertarLlegadas} />
-            <Drawer.Screen options={{drawerActiveBackgroundColor:"white"}} name='VerLlegadasSalidas' component={VerLlegadasSalidas} />
+            <Drawer.Screen options={{drawerActiveBackgroundColor:"white"}} name='InsertarLlegadas' component={InsertarLlegadas} />
+            <Drawer.Screen options={{drawerActiveBackgroundColor:"white", unmountOnBlur:true}} name='VerLlegadasSalidas' component={VerLlegadasSalidas} />
             <Drawer.Screen options={{drawerActiveBackgroundColor:"white"}} name='InsertarMulta' component={InsertarMulta} />
             <Drawer.Screen options={{drawerActiveBackgroundColor:"white"}} name='EliminarMulta' component={EliminarMulta} />           
-            <Drawer.Screen options={{drawerActiveBackgroundColor:"white"}} name='ActualizarMulta' component={ActualizarMulta} />
+            <Drawer.Screen options={{drawerActiveBackgroundColor:"white", unmountOnBlur:true}} name='ActualizarMulta' component={ActualizarMulta} />
         </Drawer.Navigator>
     );
 }

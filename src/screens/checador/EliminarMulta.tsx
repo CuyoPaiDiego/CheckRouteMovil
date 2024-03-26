@@ -6,12 +6,64 @@ import { ScrollView } from "react-native-gesture-handler";
 import { colors, globalStyles } from "../../theme/styles";
 import { Button } from "../../componentes/Button";
 import { InputIcon } from "../../componentes/InputIcon";
+import { useState } from "react";
+import { VentanaModal } from "../../componentes/Alerta";
 
 
 interface Props extends DrawerScreenProps<RootDrawerChecadorNav, any> {
 }
 
 export const EliminarMulta = () => {
+    const [numeroUnidadEliminarMulta, setNumeroUnidadEliminarMulta] = useState("");
+    const [alertaYes, setAlertYes] = useState(false);
+    const [alertaNo, setAlertNo] = useState(false);
+    const [error, setError] = useState("")
+    const ruta = "https://8681-159-54-132-73.ngrok-free.app";
+    
+    //#######  BOTON  #########
+
+    const botonEliminarMulta = async()=> {
+        const {mensaje} = await eliminarMulta(numeroUnidadEliminarMulta).then(mens =>{
+            console.log(mens);
+            return mens;
+        })
+        setNumeroUnidadEliminarMulta
+            if (mensaje == "Multa eliminada correctamente") {
+                setAlertYes(true);
+        }else{
+            const mensajeMostrado = "No se pudo eliminar la multa. " + mensaje;
+            setError(mensajeMostrado)
+            setAlertNo(true)
+        }
+
+    }
+
+        //########  FUNCION  #######
+    
+    
+        async function eliminarMulta(idmultas:string){
+            const mensaje = await fetch("https://702b-159-54-132-73.ngrok-free.app/api/multas/eliminarMulta", {
+                method : "POST",
+                headers: {
+                    "Content-Type":"application/json", 
+                },
+                body: JSON.stringify({
+                    "idmultas": idmultas
+                })
+            }).then(res =>{
+                
+                return res.json();
+                
+                
+            }).then(resolve =>{
+                console.log("error de funcion: "+resolve);
+                return resolve;
+            }).catch(e =>{
+                console.log("error del catch "+e);
+                
+            })
+            return mensaje;
+        }
     return (
         <View style={{ flex: 1 }} >
             <View style={globalStyles.container} >
@@ -37,12 +89,13 @@ export const EliminarMulta = () => {
 
                         <View style={{ marginTop: 50, flexDirection: 'column', justifyContent: "center" }}>
                             <Text style={[styles.textStyle]}>
-                                Inserta el numero de la unidad:
+                                Inserta el número de la unidad:
                             </Text>
 
                             <InputIcon iconName="car-sharp"
                                 style={{ alignSelf: "center", backgroundColor: 'white', marginTop: 20 }}
-                                onChangeText={() => { }}
+                                value={numeroUnidadEliminarMulta}
+                                onChangeText={setNumeroUnidadEliminarMulta}
                                 placeholder="Numero de unidad" />
 
                             <Button
@@ -51,7 +104,26 @@ export const EliminarMulta = () => {
                                 colorBackground={colors.primary}
                                 fontColor="white"
                                 altura={60}
-                                onPress={() => { }}
+                                onPress={botonEliminarMulta}
+                            />
+                            <VentanaModal
+                                colorIcon={colors.primary}
+                                colorBoton={colors.primary}
+                                nameIcon="checkmark-circle"
+                                visible={alertaYes}
+                                setVisible={setAlertYes}
+                                text="Multa eliminada correctamente"
+
+                            />
+
+                            <VentanaModal
+                                colorIcon="red"
+                                colorBoton="red"
+                                nameIcon="alert-circle"
+                                visible={alertaNo}
+                                setVisible={setAlertNo}
+                                text={"Ocurrio un error: " + error}
+
                             />
                         </View>
 

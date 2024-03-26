@@ -2,10 +2,10 @@ import { useContext } from "react";
 import { StyleProp, ViewStyle, TouchableOpacity, Text, StyleSheet, TextStyle } from "react-native";
 
 import { colors } from "../theme/styles";
+import { Ionicons } from "@expo/vector-icons";
 
 
 interface Props {
-    text: string;
     onPress: () => void;
     style?: StyleProp<ViewStyle>;
     colorBackground?: string;
@@ -13,21 +13,18 @@ interface Props {
     borde?: StyleProp<ViewStyle>
     styleText?: StyleProp<TextStyle>;
     altura?: number;
+    nameIcon?: string;
 }
 
-export const Button = ({altura, styleText, borde, text, onPress, style, colorBackground = colors.buttonPrimary, fontColor = "black" }: Props) => {
+export const ButtonIcon = ({nameIcon, altura, styleText, borde, onPress, style, colorBackground = colors.buttonPrimary, fontColor = "black" }: Props) => {
     
 
     return (
         <TouchableOpacity 
-            style={[ borde, localStyles.container, style, { backgroundColor: colorBackground, height: altura } ]} 
+            style={[ borde, localStyles.container, { backgroundColor: colorBackground, height: altura } ]} 
             onPress={onPress}
         >
-            <Text 
-                style={[ styleText, localStyles.text, { color: fontColor} ]} 
-            >
-                { text }
-            </Text>
+            <Ionicons style={style} name={nameIcon} size={40} />
         </TouchableOpacity>
     );
 }
