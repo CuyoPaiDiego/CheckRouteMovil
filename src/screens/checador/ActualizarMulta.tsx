@@ -12,6 +12,7 @@ import { MultasResponse } from "../../interfaces/MultasResponse";
 import { ItemType } from "react-native-dropdown-picker";
 import { DropBox } from "../../componentes/Drop";
 import { VentanaModal } from "../../componentes/Alerta";
+import { Icon } from "../../componentes/Icon";
 
 interface Props extends DrawerScreenProps<RootDrawerChecadorNav, any> {
 }
@@ -39,9 +40,9 @@ export const ActualizarMulta = () => {
         { label: 'Pagada', value: 'Pagada' },
         { label: 'Cancelada', value: 'Cancelada' }
     ];
-    
 
-  
+
+
 
     //Cargar Multas
     const obtenerMultas = async () => {
@@ -66,11 +67,11 @@ export const ActualizarMulta = () => {
 
     const botonActualizarMulta = async () => {
         intento = intento + 1;
-        const { mensaje } = await updateMulta(numeroUnidadInsertarMulta,selectedValue).then(mens => {
+        const { mensaje } = await updateMulta(numeroUnidadInsertarMulta, selectedValue).then(mens => {
             console.log("Este es el id de unidad: ", numeroUnidadInsertarMulta);
             console.log("Este es el estado de la unidad: ", selectedValue);
-            
-            
+
+
             return mens;
         })
         setNumeroUnidadInsertarMulta("");
@@ -84,7 +85,7 @@ export const ActualizarMulta = () => {
             setAlertNo(true)
         }
         console.log("soy el con: ", intento);
-        
+
         setIntento(intento);
     }
 
@@ -108,21 +109,21 @@ export const ActualizarMulta = () => {
 
 
 
-                        <View style={{ marginTop: 10, flexDirection: 'row', gap: 50, justifyContent: "center" }} >
+                        <View style={{ marginTop: 5, flexDirection: 'row', gap: 50, justifyContent: "center" }} >
 
                             <Text style={[styles.textStyleBienvenido, { fontSize: 40 }]}>
                                 ¡Actualizar Multa!
                             </Text>
                         </View>
 
-                        <View style={{ marginTop: 10, flexDirection: 'row', justifyContent: "center" }} >
+                        <View style={{ marginTop: 0, flexDirection: 'row', justifyContent: "center" }} >
 
                             <Text style={[styles.textStyle2]}>
                                 "Multas pendientes"
                             </Text>
                         </View>
 
-                        <View style={{ marginTop: 10, flexDirection: 'row', justifyContent: "center" }} >
+                        <View style={{ marginTop: 0, flexDirection: 'row', justifyContent: "center" }} >
                             {(!cargando) ? (
                                 (!error) ? (
                                     <Table style={styles.customTable}>
@@ -157,32 +158,41 @@ export const ActualizarMulta = () => {
 
 
 
-                        <View style={{ marginTop: 50, flexDirection: 'column', justifyContent: "center" }}>
+                        <View style={{ marginTop: 10, flexDirection: 'column', justifyContent: "center" }}>
                             <Text style={[styles.textStyle]}>
                                 Inserta el ID de la multa para actualizar:
                             </Text>
 
                             <InputIcon iconName="car-sharp"
-                                style={{ alignSelf: "center", backgroundColor: 'white', marginTop: 20 }}
+                                style={{ alignSelf: "center", backgroundColor: 'white', marginTop: 10 }}
                                 value={numeroUnidadInsertarMulta}
                                 onChangeText={setNumeroUnidadInsertarMulta}
                                 placeholder="ID de multa" />
 
                             <DropBox
-                                style={{ marginTop: 20 }}
+                                style={{ marginTop: 5 }}
                                 texto="Estado:"
                                 getValue={setEstados}
                                 values={estados}
-                                valor={(value:string) => setSelectedValue(value)}
+                                valor={(value: string) => setSelectedValue(value)}
                             />
 
                             <Button
-                                style={{ width: 140, alignSelf: "center", marginTop: 30 }}
+                                style={{ width: 240, alignSelf: "center", marginTop: 10 }}
                                 text="Actualizar Multa"
                                 colorBackground={colors.primary}
                                 fontColor="white"
                                 altura={60}
                                 onPress={botonActualizarMulta}
+                                styleText={{ fontSize: 20 }}
+                            />
+
+                            <Icon
+                                nameIcon='volume-high-outline'
+                                colorBackground='black'
+                                size={60}
+                                style={{ marginTop: 10, marginBottom:10, alignSelf: "center" }}
+                                width={80}
                             />
                             <VentanaModal
                                 colorIcon={colors.primary}
@@ -201,7 +211,7 @@ export const ActualizarMulta = () => {
                                 setVisible={setAlertNo}
                                 text={"Ocurrio un error: " + error2}
                             />
-                            
+
                         </View>
 
                     </ScrollView>
@@ -225,7 +235,7 @@ export const ActualizarMulta = () => {
             return resolve;
         })
             .catch(a => {
-                console.log("soy a: ",a);
+                console.log("soy a: ", a);
                 return a;
             })
 

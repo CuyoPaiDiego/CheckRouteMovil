@@ -8,6 +8,7 @@ import { Button } from "../../componentes/Button";
 import { InputIcon } from "../../componentes/InputIcon";
 import { useState } from "react";
 import { VentanaModal } from "../../componentes/Alerta";
+import { Icon } from "../../componentes/Icon";
 
 
 interface Props extends DrawerScreenProps<RootDrawerChecadorNav, any> {
@@ -19,18 +20,18 @@ export const EliminarMulta = () => {
     const [alertaNo, setAlertNo] = useState(false);
     const [error, setError] = useState("")
     const ruta = "https://8681-159-54-132-73.ngrok-free.app";
-    
+
     //#######  BOTON  #########
 
-    const botonEliminarMulta = async()=> {
-        const {mensaje} = await eliminarMulta(numeroUnidadEliminarMulta).then(mens =>{
+    const botonEliminarMulta = async () => {
+        const { mensaje } = await eliminarMulta(numeroUnidadEliminarMulta).then(mens => {
             console.log(mens);
             return mens;
         })
         setNumeroUnidadEliminarMulta
-            if (mensaje == "Multa eliminada correctamente") {
-                setAlertYes(true);
-        }else{
+        if (mensaje == "Multa eliminada correctamente") {
+            setAlertYes(true);
+        } else {
             const mensajeMostrado = "No se pudo eliminar la multa. " + mensaje;
             setError(mensajeMostrado)
             setAlertNo(true)
@@ -38,32 +39,32 @@ export const EliminarMulta = () => {
 
     }
 
-        //########  FUNCION  #######
-    
-    
-        async function eliminarMulta(idmultas:string){
-            const mensaje = await fetch("https://702b-159-54-132-73.ngrok-free.app/api/multas/eliminarMulta", {
-                method : "POST",
-                headers: {
-                    "Content-Type":"application/json", 
-                },
-                body: JSON.stringify({
-                    "idmultas": idmultas
-                })
-            }).then(res =>{
-                
-                return res.json();
-                
-                
-            }).then(resolve =>{
-                console.log("error de funcion: "+resolve);
-                return resolve;
-            }).catch(e =>{
-                console.log("error del catch "+e);
-                
+    //########  FUNCION  #######
+
+
+    async function eliminarMulta(idmultas: string) {
+        const mensaje = await fetch("https://702b-159-54-132-73.ngrok-free.app/api/multas/eliminarMulta", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                "idmultas": idmultas
             })
-            return mensaje;
-        }
+        }).then(res => {
+
+            return res.json();
+
+
+        }).then(resolve => {
+            console.log("error de funcion: " + resolve);
+            return resolve;
+        }).catch(e => {
+            console.log("error del catch " + e);
+
+        })
+        return mensaje;
+    }
     return (
         <View style={{ flex: 1 }} >
             <View style={globalStyles.container} >
@@ -99,13 +100,24 @@ export const EliminarMulta = () => {
                                 placeholder="Numero de unidad" />
 
                             <Button
-                                style={{ width: 140, alignSelf: "center", marginTop: 30 }}
+                                style={{ width: 240, alignSelf: "center", marginTop: 30 }}
                                 text="Eliminar Multa"
                                 colorBackground={colors.primary}
                                 fontColor="white"
                                 altura={60}
                                 onPress={botonEliminarMulta}
+                                styleText={{ fontSize: 20 }}
                             />
+
+                            <Icon
+                                nameIcon='volume-high-outline'
+                                colorBackground='black'
+                                size={60}
+                                style={{ marginTop: 10, marginBottom: 10, alignSelf: "center" }}
+                                width={80}
+                            />
+
+
                             <VentanaModal
                                 colorIcon={colors.primary}
                                 colorBoton={colors.primary}

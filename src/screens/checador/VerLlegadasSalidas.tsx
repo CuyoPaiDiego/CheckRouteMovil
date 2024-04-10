@@ -10,6 +10,7 @@ import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-ta
 import { useEffect, useState } from "react";
 import { LlegadasResponse } from "../../interfaces/LlegadasResponse";
 import { ButtonIcon } from "../../componentes/ButtonIcon";
+import { Icon } from "../../componentes/Icon";
 
 
 interface Props extends DrawerScreenProps<RootDrawerChecadorNav, any> {
@@ -114,6 +115,16 @@ export const VerLlegadasSalidas = ({route}: Props) => {
                                 </View>
                             )}
 
+                        </View>
+                        <View style={{ marginTop: 10, flexDirection: 'row', gap: 50, justifyContent: "center" }} >
+
+                        <Icon
+                                nameIcon='volume-high-outline'
+                                colorBackground='black'
+                                size={60}
+                                style={{ marginTop: 10, alignSelf: "center" }}
+                                width={80}
+                            />
                         </View>
 
                         

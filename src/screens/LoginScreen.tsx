@@ -12,6 +12,7 @@ import { useLogin } from '../hooks/useLogin';
 import { Ionicons } from "@expo/vector-icons"
 import { InputIconLogin } from '../componentes/InputIconLogin';
 import { VentanaModal } from '../componentes/Alerta';
+import { Icon } from '../componentes/Icon';
 
 interface Props extends StackScreenProps<RootLoginStackParams, any> {
 }
@@ -215,15 +216,21 @@ export const LoginScreen = ({ navigation }: Props) => {
                             iconName="lock-closed"
                             security={true}
                         />
-
+                        <View style={{ marginTop: 10, flexDirection: 'row', justifyContent: "center" }} >
                         <Button
-                            style={{ width: 180, alignSelf: "center", marginTop: 60 }}
+                            style={{ width: 180, alignSelf: "center", marginRight: 6 }}
                             text="Aceptar"
                             colorBackground={colors.primary}
                             onPress={autenticar}
                             altura={64}
+                            styleText={{fontSize:20}}
                         />
-
+                        <Icon
+                            nameIcon='volume-high-outline'
+                            colorBackground='black'
+                            size={60}
+                        />
+                        </View>
                         <VentanaModal
                             colorIcon={colors.primary}
                             colorBoton={colors.primary}

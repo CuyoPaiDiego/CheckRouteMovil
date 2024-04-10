@@ -2,6 +2,7 @@ import { DrawerContentComponentProps, DrawerContentScrollView, DrawerScreenProps
 import { StyleSheet, Text, View } from "react-native";
 import { RootDrawerChecadorNav } from "../navigators/DrawerNavigator";
 import { Button } from "./Button";
+import { Icon } from "./Icon";
 
 interface Props {
     drawerProps: DrawerContentComponentProps;
@@ -128,6 +129,13 @@ export const ContenidoDrawer = ({ drawerProps }: Props) => {
                         text="Salir" 
                     />
                 </View>
+                <Icon
+                                nameIcon='volume-high-outline'
+                                colorBackground='black'
+                                size={60}
+                                style={{ marginTop: 10, marginBottom: 10, alignSelf: "center" }}
+                                width={80}
+                            />
             </View>
         </DrawerContentScrollView>
     );

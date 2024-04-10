@@ -9,6 +9,7 @@ import { InputIcon } from "../../componentes/InputIcon";
 import { useState } from "react";
 import React from 'react';
 import { VentanaModal } from "../../componentes/Alerta";
+import { Icon } from "../../componentes/Icon";
 
 
 interface Props extends DrawerScreenProps<RootDrawerChecadorNav, any> {
@@ -83,13 +84,21 @@ export const InsertarMulta = () => {
 
 
                             <Button
-                                style={{ width: 140, alignSelf: "center", marginTop: 30 }}
+                                style={{ width: 240, alignSelf: "center", marginTop: 30 }}
                                 text="Registrar Multa"
                                 colorBackground={colors.primary}
                                 fontColor="white"
                                 altura={60}
                                 onPress={botonInsertarMulta}
+                                styleText={{ fontSize: 20 }}
+                            />
 
+                            <Icon
+                                nameIcon='volume-high-outline'
+                                colorBackground='black'
+                                size={60}
+                                style={{ marginTop: 10, alignSelf: "center" }}
+                                width={80}
                             />
 
                             <VentanaModal
