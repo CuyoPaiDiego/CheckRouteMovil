@@ -133,7 +133,7 @@ export const HorariosCh = ({ navigation, route }: Props) => {
 
 
     async function horario(user: string) {
-        const mensaje = await fetch('http://checkroute.ddns.net:12345/api/horarios/consultar', {
+        const mensaje = await fetch('https://702b-159-54-132-73.ngrok-free.app/api/horarios/consultar', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
